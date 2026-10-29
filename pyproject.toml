@@ -1,2 +1,19 @@
+[project]
+name = "etf-comparison-landing-page"
+version = "0.1.0"
+description = "Czech-language educational comparison of NYSE-listed ETFs"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "fastapi>=0.115,<1.0",
+    "uvicorn[standard]>=0.34,<1.0",
+    "jinja2>=3.1,<4.0",
+    "sqlalchemy>=2.0,<3.0",
+    "psycopg[binary]>=3.2,<4.0",
+    "email-validator>=2.2,<3.0",
+    "python-dotenv>=1.0,<2.0",
+    "pytest>=8.0,<9.0",
+    "httpx>=0.27,<1.0",
+]
+
 [tool.vercel]
-entrypoint = "app.main:app"
+entrypoint = "app.main"
