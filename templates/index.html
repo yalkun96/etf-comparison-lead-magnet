@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f5f4ef">
-    <meta name="description" content="Srozumitelný náhled a vzdělávací srovnání tří různých přístupů k americkým akciím: STXF, STXG a STXV.">
-    <title>Tři přístupy k americkým akciím — srovnání ETF</title>
+    <meta name="description" content="Náhled tří přístupů a rozšířené vzdělávací srovnání deseti ETF primárně kótovaných na NYSE.">
+    <title>Tři přístupy k americkým akciím — srovnání 10 ETF</title>
     <link rel="stylesheet" href="{{ url_for('static', path='/css/site.css') }}">
     <script src="{{ url_for('static', path='/js/site.js') }}" defer></script>
   </head>
@@ -24,37 +24,17 @@
         <div class="hero-copy">
           <p class="eyebrow"><span class="eyebrow-dot"></span>Průvodce americkými ETF&nbsp; / &nbsp;01</p>
           <h1 id="hero-title">Tři různé přístupy k americkým akciím. <em>V čem se liší?</em></h1>
-          <p class="hero-description">Široké zaměření na velké firmy, růstový styl a hodnotový styl. Prohlédněte si srovnání STXF, STXG a STXV — bez žebříčku a bez předstírání, že jde o stejné fondy.</p>
+          <p class="hero-description">Široké zaměření na velké firmy, růstový styl a hodnotový styl. Nejprve uvidíte STXF, STXG a STXV; rozšířené srovnání zahrnuje deset ETF primárně kótovaných na NYSE.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#preview">Prohlédnout náhled <span aria-hidden="true">↓</span></a>
-            <span class="hero-note">Nejdřív se podívejte. E-mail až pro rozšířený přehled.</span>
+            <a class="button button-primary" href="#preview" data-funnel-cta="hero">Prohlédnout náhled <span aria-hidden="true">↓</span></a>
+            <span class="hero-note">Nejdřív se podívejte. E-mail až pro úplný přehled deseti fondů.</span>
           </div>
           <div class="hero-meta" aria-label="Základní informace">
             <span><span class="meta-marker">01</span> tři odlišné styly</span>
-            <span><span class="meta-marker">02</span> ověřené zdroje</span>
+            <span><span class="meta-marker">02</span> 10 fondů s ověřenými zdroji</span>
           </div>
         </div>
-        <aside class="hero-aside" aria-label="Přehled porovnávaných přístupů">
-          <div class="aside-topline"><span>JEDEN TRH</span><span>3 PŘÍSTUPY</span></div>
-          <div class="approach-stack">
-            <div class="approach-row">
-              <span class="approach-index">A</span>
-              <div><strong>Široký trh</strong><small>Velké americké společnosti</small></div>
-              <span class="approach-symbol" aria-hidden="true">↗</span>
-            </div>
-            <div class="approach-row">
-              <span class="approach-index">B</span>
-              <div><strong>Růstový styl</strong><small>Růstové charakteristiky</small></div>
-              <span class="approach-symbol" aria-hidden="true">↗</span>
-            </div>
-            <div class="approach-row">
-              <span class="approach-index">C</span>
-              <div><strong>Hodnotový styl</strong><small>Hodnotové charakteristiky</small></div>
-              <span class="approach-symbol" aria-hidden="true">↗</span>
-            </div>
-          </div>
-          <p class="aside-caption">Rozdílné indexy. Rozdílná metodika. Srovnatelné informace.</p>
-        </aside>
+
       </section>
 
       <section class="preview-section section-pad" id="preview" aria-labelledby="preview-title">
@@ -67,33 +47,55 @@
             <p class="section-intro">Každý fond se dívá na americké akcie jinak. Tady jsou první rozdíly — a roční náklady fondu uvedené emitentem.</p>
           </div>
 
-          <div class="fund-cards" aria-label="Náhled srovnání fondů">
-            {% for fund in funds %}
-            <article class="fund-card fund-card-{{ loop.index }}">
-              <div class="fund-card-top"><span class="fund-ticker">{{ fund.ticker }}</span><span class="card-number">0{{ loop.index }}</span></div>
-              <h3>{{ fund.approach }}</h3>
-              <p class="fund-scope">{{ fund.scope }}</p>
-              <div class="fund-cost"><span>Roční náklady fondu</span><strong>{{ fund.expense_ratio }}</strong></div>
-              <p class="fund-name">{{ fund.name }}</p>
-            </article>
-            {% endfor %}
-          </div>
-
-          <div class="desktop-table-wrap">
-            <table class="preview-table">
-              <caption class="visually-hidden">Náhled investičního zaměření a uvedených nákladů fondů</caption>
-              <thead><tr><th scope="col">Fond</th><th scope="col">Přístup</th><th scope="col">Rozsah</th><th scope="col">Uvedené roční náklady</th></tr></thead>
-              <tbody>
-                {% for fund in funds %}
-                <tr><th scope="row"><span class="table-ticker">{{ fund.ticker }}</span><span class="table-name">{{ fund.name }}</span></th><td>{{ fund.approach }}</td><td>{{ fund.scope }}</td><td class="table-cost">{{ fund.expense_ratio }}</td></tr>
+          <p class="comparison-scroll-hint">Na úzké obrazovce posuňte tabulku vodorovně. Ticker a název fondu zůstávají jako orientační sloupec.</p>
+          <div class="comparison-table-wrap" id="comparison-table-wrap" role="region" aria-label="Srovnávací tabulka deseti ETF; na mobilu lze posouvat do stran" tabindex="0">
+            <table class="comparison-table" id="comparison-table">
+              <caption class="visually-hidden">Srovnání deseti ETF primárně kótovaných na NYSE; nejde o žebříček fondů</caption>
+              <thead><tr><th scope="col">Fond</th><th scope="col">Přístup a rozsah</th><th scope="col">Investiční cíl</th><th scope="col">Benchmark / srovnávací index a metodika</th><th scope="col">Roční náklady fondu</th><th scope="col">Primární burza</th></tr></thead>
+              <tbody class="visible-funds">
+                {% for fund in funds[:3] %}
+                <tr class="comparison-fund-row">
+                  <th scope="row"><span class="table-ticker">{{ fund.ticker }}</span><span class="table-name">{{ fund.name }}</span></th>
+                  <td><strong>{{ fund.approach }}</strong><br><span class="muted">{{ fund.scope }}</span></td>
+                  <td>{{ fund.objective }}</td>
+                  <td><strong>{{ fund.benchmark }}</strong><br>{{ fund.methodology }}</td>
+                  <td><strong class="table-cost">{{ fund.expense_ratio }}</strong><br><span class="muted">≈ {{ fund.cost_100k }} / rok při 100&nbsp;000 Kč</span></td>
+                  <td>{{ fund.exchange }}<br><span class="muted">NYSE; ne NYSE Arca</span><br><a href="{{ fund.exchange_url }}" target="_blank" rel="noopener noreferrer">Zdroj burzy</a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+              <tbody class="locked-preview" data-locked="true" aria-hidden="true">
+                {% for fund in funds[3:6] %}
+                <tr class="comparison-fund-row locked-row">
+                  <th scope="row"><span class="table-ticker">{{ fund.ticker }}</span><span class="table-name">{{ fund.name }}</span></th>
+                  <td><strong>{{ fund.approach }}</strong><br><span class="muted">{{ fund.scope }}</span></td>
+                  <td>{{ fund.objective }}</td>
+                  <td><strong>{{ fund.benchmark }}</strong><br>{{ fund.methodology }}</td>
+                  <td><strong class="table-cost">{{ fund.expense_ratio }}</strong><br><span class="muted">≈ {{ fund.cost_100k }} / rok při 100&nbsp;000 Kč</span></td>
+                  <td>{{ fund.exchange }}<br><span class="muted">NYSE; ne NYSE Arca</span><br><a href="{{ fund.exchange_url }}" target="_blank" rel="noopener noreferrer">Zdroj burzy</a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+              <tbody class="lock-callout">
+                <tr><td colspan="6"><div class="table-lock-message" id="lead-offer"><p><strong>Úplné srovnání obsahuje 10 ETF.</strong> Po zadání jména a e-mailu se v této tabulce otevřou všechny fondy včetně jejich cílů, benchmarků, nákladů a zdrojů.</p><button class="button button-primary" id="open-lead-modal" type="button" data-funnel-cta="table_unlock">Odemknout úplné srovnání <span aria-hidden="true">↗</span></button></div></td></tr>
+              </tbody>
+              <tbody class="locked-hidden" data-locked="true" aria-hidden="true">
+                {% for fund in funds[6:] %}
+                <tr class="comparison-fund-row locked-row">
+                  <th scope="row"><span class="table-ticker">{{ fund.ticker }}</span><span class="table-name">{{ fund.name }}</span></th>
+                  <td><strong>{{ fund.approach }}</strong><br><span class="muted">{{ fund.scope }}</span></td>
+                  <td>{{ fund.objective }}</td>
+                  <td><strong>{{ fund.benchmark }}</strong><br>{{ fund.methodology }}</td>
+                  <td><strong class="table-cost">{{ fund.expense_ratio }}</strong><br><span class="muted">≈ {{ fund.cost_100k }} / rok při 100&nbsp;000 Kč</span></td>
+                  <td>{{ fund.exchange }}<br><span class="muted">NYSE; ne NYSE Arca</span><br><a href="{{ fund.exchange_url }}" target="_blank" rel="noopener noreferrer">Zdroj burzy</a></td>
+                </tr>
                 {% endfor %}
               </tbody>
             </table>
           </div>
 
-          <p class="preview-disclaimer">Uvedené náklady jsou provozní náklady fondu, ne všechny náklady investora. Fondy mají rozdílné strategie a benchmarky; nižší sazba sama o sobě neříká, který fond je vhodný.</p>
-          <p class="source-line">Údaje z produktových stránek emitenta, kontrolováno {{ checked_on }}. Prospekty uvádějí celkové roční provozní náklady a nerozlišují samostatnou hrubou a čistou sazbu. <a href="{{ funds[0].issuer_url }}" target="_blank" rel="noopener noreferrer">STXF</a> · <a href="{{ funds[1].issuer_url }}" target="_blank" rel="noopener noreferrer">STXG</a> · <a href="{{ funds[2].issuer_url }}" target="_blank" rel="noopener noreferrer">STXV</a></p>
-        </div>
+          <p class="preview-disclaimer">Jde o různé investiční přístupy, ne zaměnitelné alternativy ani žebříček od nejlepšího. Uvedené provozní náklady fondu nejsou úplnými náklady investora.</p>
+          <p class="source-line">Zdroje pro první tři fondy byly kontrolovány 28. 10. 2026. Prospekty uvádějí celkové roční provozní náklady a nerozlišují samostatnou hrubou a čistou sazbu. <a href="{{ funds[0].issuer_url }}" target="_blank" rel="noopener noreferrer">STXF</a> · <a href="{{ funds[1].issuer_url }}" target="_blank" rel="noopener noreferrer">STXG</a> · <a href="{{ funds[2].issuer_url }}" target="_blank" rel="noopener noreferrer">STXV</a></p>
       </section>
 
       <section class="definitions-section section-pad" aria-labelledby="definitions-title">
@@ -128,51 +130,6 @@
         </div>
       </section>
 
-      <section class="unlock-section section-pad" id="unlock" aria-labelledby="unlock-title">
-        <div class="page-shell unlock-layout">
-          <div class="unlock-copy">
-            <p class="eyebrow">Rozšířený přehled <span class="eyebrow-line"></span></p>
-            <h2 id="unlock-title">Všechny podklady.<br><em>Na jednom místě.</em></h2>
-            <p>Po zaznamenání jména a e-mailu se zde otevře úplné srovnání. U každého fondu najdete investiční cíl, benchmark a jeho metodiku, zdroje s datem kontroly i známá omezení.</p>
-            <div class="unlock-includes">
-              <span><b>01</b> Investiční cíle a rozsah</span>
-              <span><b>02</b> Benchmarky a jejich metodika</span>
-              <span><b>03</b> Orientační náklad při 100 000 Kč</span>
-              <span><b>04</b> Zdroje a upozornění</span>
-            </div>
-          </div>
-
-          <div class="form-card">
-            <div class="form-card-heading">
-              <span class="form-step">VAŠE SROVNÁNÍ / 01</span>
-              <h3>Odemknout celý přehled</h3>
-              <p>Jméno a e-mail jsou potřeba pro uložení žádosti a zaslání potvrzení.</p>
-            </div>
-            <form id="lead-form" action="/api/leads" method="post" novalidate>
-              <div class="field-group">
-                <label for="first-name">Jméno <span aria-hidden="true">*</span></label>
-                <input id="first-name" name="first_name" type="text" autocomplete="given-name" maxlength="80" placeholder="Vaše jméno" required aria-describedby="first-name-error">
-                <p class="field-error" id="first-name-error"></p>
-              </div>
-              <div class="field-group">
-                <label for="email">E-mail <span aria-hidden="true">*</span></label>
-                <input id="email" name="email" type="email" autocomplete="email" maxlength="320" placeholder="vas@email.cz" required aria-describedby="email-error">
-                <p class="field-error" id="email-error"></p>
-              </div>
-              <label class="consent-option" for="marketing-consent">
-                <input id="marketing-consent" name="marketing_consent" type="checkbox" value="true">
-                <span>Chci dostávat e-mailové novinky od <strong>[název správce]</strong>. Souhlas je dobrovolný a mohu jej kdykoli odvolat.</span>
-              </label>
-              <p class="privacy-copy">Jméno a e-mail použijeme k zaznamenání vaší žádosti a k zaslání vyžádaného potvrzení. Marketingové zprávy jsou samostatné a nepovinné. <a href="#privacy">Informace o ochraně osobních údajů</a>.</p>
-              <button class="button button-primary form-submit" type="submit">
-                <span class="button-label">Otevřít srovnání</span><span class="button-spinner" aria-hidden="true"></span><span aria-hidden="true">↗</span>
-              </button>
-              <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-            </form>
-          </div>
-        </div>
-      </section>
-
       <section class="full-comparison section-pad" id="full-comparison" aria-labelledby="full-title" hidden>
         <div class="page-shell">
           <div class="unlock-success" id="unlock-success" tabindex="-1">
@@ -180,37 +137,20 @@
             <div><p class="eyebrow">Přístup zaznamenán</p><h2 id="full-title">Děkujeme, <span id="visitor-name">investore</span>. Přehled je odemčený.</h2></div>
           </div>
           <div class="email-result" id="email-result" role="status" aria-live="polite"></div>
-          <div class="section-heading section-heading-split full-heading">
-            <div><p class="eyebrow">Rozšířená tabulka <span class="eyebrow-line"></span></p><h2>Každý fond.<br><em>Stejná otázka.</em></h2></div>
-            <p class="section-intro">Uvedené provozní náklady přepočtené pro hypotetickou investici 100 000 Kč. Výpočet předpokládá stálou hodnotu investice a nezměněnou sazbu.</p>
-          </div>
-
-          <div class="comparison-table-wrap">
-            <table class="comparison-table">
-              <caption class="visually-hidden">Podrobné srovnání fondů STXF, STXG a STXV</caption>
-              <thead><tr><th scope="col">Údaj</th>{% for fund in funds %}<th scope="col"><span class="table-ticker">{{ fund.ticker }}</span><span class="table-name">{{ fund.name }}</span></th>{% endfor %}</tr></thead>
-              <tbody>
-                <tr><th scope="row">Investiční zaměření</th>{% for fund in funds %}<td>{{ fund.approach }}<br><span class="muted">{{ fund.scope }}</span></td>{% endfor %}</tr>
-                <tr><th scope="row">Investiční cíl</th>{% for fund in funds %}<td>{{ fund.objective }}</td>{% endfor %}</tr>
-                <tr><th scope="row">Aktuálně uváděný benchmark</th>{% for fund in funds %}<td><strong>{{ fund.benchmark }}</strong><br>{{ fund.methodology }}</td>{% endfor %}</tr>
-                <tr><th scope="row">Roční provozní náklady fondu</th>{% for fund in funds %}<td><strong class="table-cost">{{ fund.expense_ratio }}</strong><br><span class="muted">{{ fund.cost_100k }} / rok při investici 100 000 Kč</span></td>{% endfor %}</tr>
-                <tr><th scope="row">Primární burza</th><td colspan="3">New York Stock Exchange, Inc. <span class="muted">(NYSE; nejde o NYSE Arca)</span> — <a href="{{ exchange_source }}" target="_blank" rel="noopener noreferrer">oficiální záznam SEC</a></td></tr>
-              </tbody>
-            </table>
-          </div>
+          <p class="unlocked-note">Všech deset ETF je nyní zobrazeno v tabulce výše. Níže najdete výpočet nákladů, zdroje, data kontroly a omezení srovnání.</p>
 
           <div class="calculation-note">
             <span class="calculation-mark" aria-hidden="true">≈</span>
-            <div><h3>Jak číst orientační výpočet</h3><p><code>Hypotetická investice × uvedená roční sazba nákladů fondu</code></p><p>100 000 Kč × 0,0545 % = 54,50 Kč; 100 000 Kč × 0,18 % = 180 Kč. Jde o ilustraci, nikoli prognózu nebo celkové náklady na vlastnictví. Nezahrnuje poplatky brokera, rozpětí mezi nákupní a prodejní cenou, daně, směnu měny ani jiné individuální náklady. Skutečná částka se může měnit.</p></div>
+            <div><h3>Jak číst orientační výpočet</h3><p><code>Hypotetická investice × uvedená roční sazba nákladů fondu</code></p><p>Částky ve sloupci nákladů jsou ilustrativní odhady při stálé hodnotě investice a nezměněné sazbě. Nejde o prognózu ani úplné náklady na vlastnictví. Nezahrnují poplatky brokera, rozpětí mezi nákupní a prodejní cenou, daně, směnu měny ani jiné individuální náklady. Skutečná částka se může měnit.</p></div>
           </div>
 
           <div class="source-notes" id="sources">
-            <div class="source-notes-heading"><p class="eyebrow">Metodika a zdroje <span class="eyebrow-line"></span></p><h3>Odkud údaje pocházejí</h3><p>Stránky emitenta, prospekty a záznamy SEC jsme kontrolovali {{ checked_on }}. Údaje se mohou změnit.</p></div>
+            <div class="source-notes-heading"><p class="eyebrow">Metodika a zdroje <span class="eyebrow-line"></span></p><h3>Odkud údaje pocházejí</h3><p>Původní tři fondy byly kontrolovány 28. 10. 2026, dalších sedm 29. 10. 2026. Datum kontroly a datum dokumentu jsou uvedeny u každého fondu. Údaje se mohou změnit.</p></div>
             <div class="source-list">
               {% for fund in funds %}
-              <article class="source-item"><span class="source-ticker">{{ fund.ticker }}</span><div><h4>{{ fund.name }}</h4><p>{{ fund.note }}</p><p class="source-links"><a href="{{ fund.issuer_url }}" target="_blank" rel="noopener noreferrer">Stránka emitenta</a><a href="{{ fund.prospectus_url }}" target="_blank" rel="noopener noreferrer">Prospekt / souhrnný prospekt (SEC)</a></p><small>Kontrola zdrojů: {{ checked_on }}. Prospekty jsou datovány 31. 10. 2025.</small></div></article>
+              <article class="source-item"><span class="source-ticker">{{ fund.ticker }}</span><div><h4>{{ fund.name }}</h4><p>{{ fund.note }}</p><p class="source-links"><a href="{{ fund.issuer_url }}" target="_blank" rel="noopener noreferrer">Produktová stránka emitenta</a><a href="{{ fund.prospectus_url }}" target="_blank" rel="noopener noreferrer">Prospekt / dokument SEC</a><a href="{{ fund.exchange_url }}" target="_blank" rel="noopener noreferrer">Primární burza / listing</a></p><small>{{ fund.source_label }}</small></div></article>
               {% endfor %}
-              <article class="source-item"><span class="source-ticker">NYSE</span><div><h4>Ověření primární burzy</h4><p>SEC N-CEN uvádí pro všechny tři fondy „NEW YORK STOCK EXCHANGE, INC.“.</p><p class="source-links"><a href="{{ exchange_source }}" target="_blank" rel="noopener noreferrer">Záznam SEC</a></p><small>Kontrola zdroje: {{ checked_on }}.</small></div></article>
+              <article class="source-item"><span class="source-ticker">NYSE</span><div><h4>Rozsah burzovního zařazení</h4><p>Rozsah byl ověřen pro každý fond zvlášť z produktových stránek emitentů a dokumentů SEC. Všechny zde uvedené fondy mají NYSE jako primární burzu; NYSE Arca je vyloučena.</p><p class="source-links"><a href="https://www.nyse.com/listings_directory/etf?ListedComp=All" target="_blank" rel="noopener noreferrer">Adresář ETF NYSE</a><a href="{{ exchange_source }}" target="_blank" rel="noopener noreferrer">SEC N-CEN pro původní tři fondy</a></p><small>Kontrola zdrojů: původní záznam 28. 10. 2026; doplňující fondy 29. 10. 2026.</small></div></article>
             </div>
             <details class="benchmark-note">
               <summary>Podrobně k označení benchmarku STXF <span class="summary-plus" aria-hidden="true"></span></summary>
@@ -218,10 +158,10 @@
             </details>
             <details class="benchmark-note">
               <summary>Omezení srovnání a dostupnosti <span class="summary-plus" aria-hidden="true"></span></summary>
-              <div class="definition-content"><p>Všechny fondy patří do nabídky stejného emitenta, EA Series Trust, a ve zdrojích mají stejného poradce a podporadce. Jde o malý výběr, nikoli přehled celého trhu.</p><p>Českou dostupnost u konkrétních brokerů jsme neověřovali. Ve zkoumaných amerických materiálech jsme nenašli PRIIPs KID; to není důkaz, že neexistuje. Burzovní listing sám o sobě nepotvrzuje, že český drobný investor může fond koupit.</p><p>{{ common_issuer_note }}</p><p class="source-links"><a href="{{ stxg_supplement_url }}" target="_blank" rel="noopener noreferrer">Dodatek k prospektům STXG a STXV (září 2026)</a><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32014R1286" target="_blank" rel="noopener noreferrer">Nařízení PRIIPs EU</a><a href="https://www.cnb.cz/en/supervision-financial-market/legislation/key-information-documents-priips/index.html" target="_blank" rel="noopener noreferrer">Informace ČNB k PRIIPs</a><a href="https://www.cnb.cz/en/faq/Questions-and-answers-on-the-PRIIPs-KID" target="_blank" rel="noopener noreferrer">Otázky ČNB k PRIIPs KID</a></p></div>
+              <div class="definition-content"><p>Tento výběr pokrývá deset fondů dvou emitentů, z toho sedm fondů Strive a tři fondy Baron. Výběr vznikl podle ověřitelnosti primární burzy NYSE, nikoli jako reprezentativní vzorek celého trhu. Aktivně řízené fondy a tematické fondy mají jiný cíl i rizika než široké indexové fondy.</p><p>Českou dostupnost u konkrétních brokerů jsme neověřovali. Ve zkoumaných amerických materiálech jsme nenašli PRIIPs KID; to není důkaz, že neexistuje. Burzovní listing sám o sobě nepotvrzuje, že český drobný investor může fond koupit.</p><p>{{ common_issuer_note }}</p><p class="source-links"><a href="{{ stxg_supplement_url }}" target="_blank" rel="noopener noreferrer">Dodatek k prospektům STXG a STXV (září 2026)</a><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32014R1286" target="_blank" rel="noopener noreferrer">Nařízení PRIIPs EU</a><a href="https://www.cnb.cz/en/supervision-financial-market/legislation/key-information-documents-priips/index.html" target="_blank" rel="noopener noreferrer">Informace ČNB k PRIIPs</a><a href="https://www.cnb.cz/en/faq/Questions-and-answers-on-the-PRIIPs-KID" target="_blank" rel="noopener noreferrer">Otázky ČNB k PRIIPs KID</a></p></div>
             </details>
           </div>
-          <p class="final-disclaimer">Srovnání je určeno pouze pro vzdělávací účely. Nepředstavuje investiční doporučení ani osobní radu. STXF, STXG a STXV používají různé investiční přístupy a nejsou zaměnitelné. Uvedené náklady nejsou úplnými náklady investora. Dostupnost těchto fondů u konkrétního brokera pro české drobné investory nebyla ověřena.</p>
+          <p class="final-disclaimer">Srovnání je určeno pouze pro vzdělávací účely. Nepředstavuje investiční doporučení ani osobní radu. Fondy používají různé investiční přístupy a nejsou zaměnitelné ani seřazené od nejlepšího. Uvedené náklady nejsou úplnými náklady investora. Dostupnost těchto fondů u konkrétního brokera pro české drobné investory nebyla ověřena.</p>
         </div>
       </section>
 
@@ -234,7 +174,36 @@
     </main>
 
     <footer class="site-footer">
-      <div class="page-shell footer-inner"><a class="wordmark" href="#top"><span class="wordmark-mark" aria-hidden="true">E</span><span>ETF <span class="wordmark-light">PŘEHLED</span></span></a><p>Vzdělávací přehled · Data kontrolována {{ checked_on }}</p><a href="#privacy">Soukromí</a></div>
+      <div class="page-shell footer-inner"><a class="wordmark" href="#top"><span class="wordmark-mark" aria-hidden="true">E</span><span>ETF <span class="wordmark-light">PŘEHLED</span></span></a><p>Vzdělávací přehled · Výzkum aktualizován 29. 10. 2026</p><a href="#privacy">Soukromí</a></div>
     </footer>
+    <dialog class="lead-modal" id="lead-modal" aria-labelledby="lead-modal-title" aria-describedby="lead-modal-description">
+      <div class="lead-modal-inner">
+        <button class="modal-close" id="close-lead-modal" type="button" aria-label="Zavřít okno">×</button>
+        <p class="eyebrow">Úplné srovnání / 10 ETF</p>
+        <h2 id="lead-modal-title">Odemknout úplné srovnání</h2>
+        <p id="lead-modal-description" class="modal-description">Zadejte jméno a e-mail. Po úspěšném uložení se všech deset řádků otevře přímo v tabulce.</p>
+        <form id="lead-form" action="/api/leads" method="post" novalidate>
+          <div class="field-group">
+            <label for="first-name">Jméno <span aria-hidden="true">*</span></label>
+            <input id="first-name" name="first_name" type="text" autocomplete="given-name" maxlength="80" placeholder="Vaše jméno" required aria-describedby="first-name-error">
+            <p class="field-error" id="first-name-error"></p>
+          </div>
+          <div class="field-group">
+            <label for="email">E-mail <span aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" maxlength="320" placeholder="vas@email.cz" required aria-describedby="email-error">
+            <p class="field-error" id="email-error"></p>
+          </div>
+          <label class="consent-option" for="marketing-consent">
+            <input id="marketing-consent" name="marketing_consent" type="checkbox" value="true">
+            <span>Chci dostávat e-mailové novinky od <strong>[název správce]</strong>. Souhlas je dobrovolný a mohu jej kdykoli odvolat.</span>
+          </label>
+          <p class="privacy-copy">Jméno a e-mail použijeme k zaznamenání vaší žádosti a k zaslání vyžádaného potvrzení. Marketingové zprávy jsou samostatné a nepovinné. <a href="#privacy">Informace o ochraně osobních údajů</a>.</p>
+          <button class="button button-primary form-submit" type="submit" data-funnel-cta="form">
+            <span class="button-label">Odemknout úplné srovnání</span><span aria-hidden="true">↗</span>
+          </button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </dialog>
   </body>
 </html>

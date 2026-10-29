@@ -1,11 +1,8 @@
-"""Optional Resend adapter. No credentials means no email is sent."""
-
 from dataclasses import dataclass
 from html import escape
-import json
 import os
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
+
+import resend
 
 
 @dataclass(frozen=True)
@@ -16,48 +13,58 @@ class EmailResult:
 def send_confirmation(first_name: str, recipient: str) -> EmailResult:
     api_key = os.getenv("RESEND_API_KEY", "").strip()
     from_email = os.getenv("RESEND_FROM_EMAIL", "").strip()
-    site_url = os.getenv("SITE_URL", "http://127.0.0.1:8000").rstrip("/")
+    site_url = os.getenv(
+        "SITE_URL",
+        "http://127.0.0.1:8000",
+    ).rstrip("/")
 
     if not api_key or not from_email:
+        print("Resend is not configured: API key or sender is missing.")
         return EmailResult(status="not_configured")
 
-    safe_name = escape(first_name)
-    safe_url = escape(site_url, quote=True)
-    plain_text = (
-        f"Dobrý den, {first_name},\n\n"
-        "děkujeme za zájem o srovnání ETF STXF, STXG a STXV. "
-        f"Přehled najdete na této stránce: {site_url}\n\n"
-        "Po návratu na stránku zadejte stejný e-mail a srovnání znovu otevřete.\n\n"
-        "Tento e-mail potvrzuje vaši žádost o srovnání. Nejde o marketingový e-mail."
-    )
-    html = (
-        f"<p>Dobrý den, {safe_name},</p>"
-        "<p>Děkujeme za zájem o srovnání ETF STXF, STXG a STXV. "
-        f'<a href="{safe_url}">Otevřít srovnání</a>.</p>'
-        "<p>Po návratu na stránku zadejte stejný e-mail a srovnání znovu otevřete.</p>"
-        "<p>Tento e-mail potvrzuje vaši žádost o srovnání. Nejde o marketingový e-mail.</p>"
-    )
+    name = first_name.strip() or "investore"
+
     payload = {
         "from": from_email,
         "to": [recipient],
         "subject": "Vaše srovnání ETF je připravené",
-        "text": plain_text,
-        "html": html,
+        "text": (
+            f"Dobrý den, {name},\n\n"
+            "Vaše srovnání ETF je připravené.\n"
+            f"Otevřete stránku: {site_url}\n"
+        ),
+        "html": (
+            f"<p>Dobrý den, {escape(name)},</p>"
+            "<p>Vaše srovnání ETF je připravené.</p>"
+            f'<p><a href="{escape(site_url, quote=True)}">'
+            "Otevřít srovnání ETF</a></p>"
+        ),
     }
-    request = Request(
-        "https://api.resend.com/emails",
-        data=json.dumps(payload).encode("utf-8"),
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        },
-        method="POST",
-    )
 
     try:
-        with urlopen(request, timeout=8) as response:
-            if 200 <= response.status < 300:
-                return EmailResult(status="accepted")
-            return EmailResult(status="failed")
-    except (HTTPError, URLError, TimeoutError, OSError):
+        resend.api_key = api_key
+        result = resend.Emails.send(payload)
+
+        email_id = (
+            result.get("id")
+            if hasattr(result, "get")
+            else getattr(result, "id", None)
+        )
+
+        if email_id:
+            print(f"Confirmation email accepted by Resend: id={email_id}")
+            return EmailResult(status="accepted")
+
+        print(
+            "Resend returned a response without an email ID. "
+            f"Response type: {type(result).__name__}"
+        )
+        return EmailResult(status="failed")
+
+    except Exception as exc:
+        print(
+            "Resend send failed: "
+            f"type={type(exc).__name__}, "
+            f"message={str(exc)[:300]}"
+        )
         return EmailResult(status="failed")

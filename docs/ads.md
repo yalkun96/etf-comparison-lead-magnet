@@ -1,6 +1,6 @@
 # Ads and Landing-Page Copy
 
-This document records the Step 4 advertising concepts and Czech-language copy. The copy describes the intended experience; it does not imply that the page, form, or email flow has already been implemented or tested.
+This document records the approved Step 4 advertising concepts and Czech-language copy, aligned with the implemented local MVP: visitors preview three funds; the full on-page comparison covers ten funds. The concepts remain hypotheses; no conversion performance is claimed.
 
 ## Advertising concept A — Understanding the three approaches
 
@@ -10,18 +10,18 @@ This document records the Step 4 advertising concepts and Czech-language copy. T
 
 **Marketing angle:** Explain three distinct approaches in plain Czech and provide a useful comparison preview.
 
-**Promise:** See how broad U.S. large-cap exposure, growth-oriented equities, and value-oriented equities differ, using STXF, STXG, and STXV as examples.
+**Promise:** See how broad U.S. large-cap exposure, growth-oriented equities, and value-oriented equities differ in a three-fund preview; the full page comparison covers ten NYSE-listed U.S. equity ETFs with distinct approaches.
 
 ### Mobile ad
 
 - **Headline:** Tři přístupy k americkým akciím. Srozumitelně.
-- **Primary text:** Co znamená široké zaměření na velké americké firmy, růstový styl a hodnotový styl? Prohlédněte si náhled srovnání ETF STXF, STXG a STXV a zjistěte, v čem se liší jejich zaměření. Rozšířený přehled otevřete na stránce po zadání jména a e-mailu.
+- **Primary text:** Co znamená široké zaměření na velké americké firmy, růstový styl a hodnotový styl? Prohlédněte si náhled srovnání STXF, STXG a STXV. Po zadání jména a e-mailu se na stránce otevře rozšířené vzdělávací srovnání deseti ETF primárně kótovaných na NYSE. Fondy mají různé strategie a nejde o žebříček ani doporučení.
 - **CTA:** Prohlédnout srovnání
 
 ### Matching landing-page first screen
 
 - **Headline:** Tři různé přístupy k americkým akciím. V čem se liší?
-- **Supporting text:** Prohlédněte si náhled ETF STXF, STXG a STXV: široké zaměření na velké americké firmy, růstový styl a hodnotový styl. Nejde o žebříček ani o zaměnitelné fondy.
+- **Supporting text:** Prohlédněte si náhled ETF STXF, STXG a STXV: široké zaměření na velké americké firmy, růstový styl a hodnotový styl. Úplné srovnání zahrnuje deset různých fondů primárně kótovaných na NYSE; nejde o žebříček ani o zaměnitelné fondy.
 - **CTA:** Prohlédnout náhled
 - **Preview:** Three short fund cards showing each fund's general approach and stated annual fund operating expenses.
 
@@ -37,18 +37,18 @@ This document records the Step 4 advertising concepts and Czech-language copy. T
 
 **Marketing angle:** Put three example funds' objectives, benchmark approaches, and stated annual fund expenses in one educational comparison.
 
-**Promise:** Preview how STXF, STXG, and STXV differ in investment approach, benchmark, and stated annual fund operating expenses.
+**Promise:** Preview how STXF, STXG, and STXV differ in investment approach and stated annual fund operating expenses; unlock the full comparison of ten ETFs, including objectives, benchmarks or reference indices, methodologies, sources, and limitations.
 
 ### Mobile ad
 
 - **Headline:** Cíle, indexy a náklady tří ETF přehledně
-- **Primary text:** Podívejte se na náhled srovnání STXF, STXG a STXV podle investičního zaměření, benchmarku a uvedených ročních nákladů fondu. Jde o tři rozdílné přístupy k americkým akciím, ne o žebříček nejlepších ETF. Rozšířenou tabulku s metodikou a zdroji otevřete na stránce po zadání jména a e-mailu.
+- **Primary text:** Podívejte se na náhled tří různých ETF podle investičního zaměření a uvedených ročních nákladů fondu. Po zadání jména a e-mailu se na stránce otevře srovnání deseti ETF primárně kótovaných na NYSE včetně investičních cílů, benchmarků nebo srovnávacích indexů, metodik a zdrojů. Nejde o žebříček ani osobní doporučení.
 - **CTA:** Porovnat charakteristiky
 
 ### Matching landing-page first screen
 
 - **Headline:** Tři ETF. Vedle sebe jejich zaměření, benchmarky a uvedené náklady.
-- **Supporting text:** Náhled srovnává STXF, STXG a STXV. Fondy sledují rozdílné investiční přístupy; jejich náklady proto samy o sobě neurčují, který je pro koho vhodný.
+- **Supporting text:** Náhled srovnává STXF, STXG a STXV. Rozšířená tabulka zahrnuje deset fondů a jejich různé investiční přístupy; uvedené náklady samy o sobě neurčují, který je pro koho vhodný.
 - **CTA:** Zobrazit náhled srovnání
 - **Preview:** A compact preview of each fund's broad approach, proposed current benchmark label, and stated annual operating expense ratio.
 
@@ -70,6 +70,8 @@ This document records the Step 4 advertising concepts and Czech-language copy. T
 
 *Jde o tři různé investiční přístupy, nikoli o zaměnitelné fondy nebo doporučení. Uvedené náklady jsou náklady na provoz fondu; nejsou úplným přehledem nákladů investora.*
 
+The preview is a sample of the complete comparison. It does not imply the three preview funds represent the full ten-fund set or that every fund follows an index.
+
 ### Expandable explanations
 
 **Co znamená široké zaměření na velké americké společnosti?**  
@@ -89,19 +91,26 @@ Jde o uvedené roční provozní náklady fondu vyjádřené jako podíl z inves
 
 ### Full comparison offer
 
-**Nadpis:** Otevřete rozšířené srovnání přímo na stránce
+**Nadpis:** Odemkněte úplné srovnání přímo na stránce
 
-**Text:** Po zaznamenání vašeho jména a e-mailu se zde zobrazí úplné srovnání. U každého fondu najdete investiční cíl, benchmark a stručné vysvětlení jeho metodiky, uvedené roční náklady fondu, odkazy na zdroje a datum jejich kontroly.
+**Text:** Po zaznamenání vašeho jména a e-mailu se zde zobrazí srovnání deseti fondů. U každého najdete investiční přístup, cíl, benchmark nebo srovnávací index s metodikou, primární burzu, uvedené roční náklady fondu, orientační výpočet pro 100 000 Kč, zdroje s datem kontroly a známá omezení.
 
 Součástí je také orientační výpočet pro hypotetickou investici **100 000 Kč**:
 
-- STXF: přibližně **54,50 Kč ročně**
-- STXG: přibližně **180 Kč ročně**
-- STXV: přibližně **180 Kč ročně**
+| ETF | Orientační náklad při 100 000 Kč |
+|---|---:|
+| STXF | přibližně **54,50 Kč ročně** |
+| STXG, STXV, STXK | přibližně **180 Kč ročně** |
+| STXD | přibližně **350 Kč ročně** |
+| DRLL | přibližně **410 Kč ročně** |
+| SHOC | přibližně **400 Kč ročně** |
+| BROL | přibližně **450 Kč ročně** |
+| RONB | přibližně **1 000 Kč ročně** |
+| BCSM | přibližně **750 Kč ročně** |
 
 *Výpočet předpokládá neměnnou hodnotu investice a nezměněnou nákladovost fondu. Nejde o prognózu ani úplné náklady na investování; nezahrnuje mimo jiné poplatky brokera, rozpětí, daně a směnu měny.*
 
-**CTA:** Otevřít úplné srovnání
+**CTA:** Odemknout úplné srovnání
 
 ### Lead form
 
@@ -112,7 +121,7 @@ Součástí je také orientační výpočet pro hypotetickou investici **100 000
 **Use-of-information explanation:**  
 `Jméno a e-mail použijeme k zaznamenání vaší žádosti o srovnání. Na uvedený e-mail vám také zašleme vyžádané potvrzení s odkazem na stránku. Marketingové e-maily budeme zasílat pouze na základě samostatného souhlasu nebo jiného ověřeného právního důvodu. Více v [informacích o ochraně osobních údajů].`
 
-**Button:** `Otevřít srovnání`
+**Button:** `Odemknout úplné srovnání`
 
 The privacy link and consent wording require the actual data controller, applicable legal basis, contact details, retention policy, and withdrawal process before publication.
 
@@ -134,7 +143,7 @@ These messages must only be used after the corresponding behavior is implemented
 
 `Dobrý den, {{jmeno}},`
 
-`děkujeme za zájem o srovnání ETF STXF, STXG a STXV. Rozšířený přehled si můžete otevřít na této stránce:`
+`děkujeme za zájem o srovnání ETF. Rozšířený přehled deseti fondů si můžete otevřít na této stránce:`
 
 **Odkaz:** `Otevřít srovnání` → `[odkaz na landing page]`
 
@@ -144,7 +153,7 @@ These messages must only be used after the corresponding behavior is implemented
 
 ### Educational disclaimer
 
-`Srovnání je určeno pouze pro vzdělávací účely. Nepředstavuje investiční doporučení ani osobní radu. STXF, STXG a STXV používají různé investiční přístupy a nejsou zaměnitelné. Uvedené náklady nejsou úplnými náklady investora. Dostupnost těchto fondů u konkrétního brokera pro české drobné investory nebyla ověřena.`
+`Srovnání je určeno pouze pro vzdělávací účely. Nepředstavuje investiční doporučení ani osobní radu. Fondy používají různé investiční přístupy a nejsou zaměnitelné ani seřazené od nejlepšího. Uvedené náklady nejsou úplnými náklady investora. Dostupnost těchto fondů u konkrétního brokera pro české drobné investory nebyla ověřena.`
 
 ## Supporting source note for STXF
 
@@ -152,7 +161,7 @@ Use **Bloomberg US Large Cap Index** as the proposed current benchmark label, fo
 
 `Aktuální stránka emitenta označuje benchmark fondu STXF jako Bloomberg US Large Cap Index. Prospekt z října 2025 používá název Bloomberg 500 Index a zpráva za červen 2026 obsahuje v části věnované výkonnosti také nekonzistentní označení. Emitent tento rozdíl formálně nevysvětlil. Tato označení zde nepovažujeme za oficiálně zaměnitelná.`
 
-The ticker changed from STRV to STXF effective June 8, 2026; this was a ticker change, not a benchmark change. The research was checked on **October 28, 2026** and financial data should be rechecked before publication.
+The ticker changed from STRV to STXF effective June 8, 2026; this was a ticker change, not a benchmark change. The original three-fund research was checked on **October 28, 2026**; the seven additional funds were checked on **October 29, 2026**. Financial data should be rechecked before publication.
 
 ## Initial concept recommendation
 

@@ -1,9 +1,33 @@
-.DS_Store
+# Environment variables and secrets
 .env
-.venv/
+.env.*
+!.env.example
+
+# Python
 __pycache__/
 *.py[cod]
+*.pyo
+*.pyd
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
 .coverage
-local.db
-.local/
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3

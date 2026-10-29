@@ -1,6 +1,6 @@
 # Local Development
 
-This project is a FastAPI and Jinja2 landing page with PostgreSQL lead storage. It does not deploy or create cloud resources. The form sends email only when Resend credentials and a verified sender are configured; otherwise it reports that no email was sent.
+This project is a FastAPI and Jinja2 landing page with PostgreSQL lead storage. It does not deploy or create cloud resources. The lead-save route commits and responds before the separate confirmation-email request. The page unlocks after the committed save; the later email status is shown only after the provider attempt returns. Email is sent only when Resend credentials and a verified sender are configured; otherwise the page reports that no email was sent.
 
 ## Requirements
 
@@ -52,20 +52,22 @@ source .venv/bin/activate
 pytest -q
 ```
 
-The critical form and persistence tests use an isolated in-memory SQLite database to avoid requiring the local PostgreSQL service. They do not replace manually checking the application against PostgreSQL.
+The critical form, persistence, email-ordering and event-endpoint tests use an isolated in-memory SQLite database to avoid requiring the local PostgreSQL service. They do not replace manually checking the application against PostgreSQL.
 
 When the same normalized email is submitted again, the row is updated with the latest name and checkbox state. An unchecked box clears the stored marketing-consent flag and timestamp; marketing sending is not implemented.
 
 ## Manual browser review
 
 1. At a narrow mobile width, confirm the heading, benefit, and preview CTA are visible without scrolling.
-2. Check the three preview cards on mobile and the compact comparison table on desktop.
+2. Confirm exactly one comparison table appears near the beginning. Its first three rows should be readable, rows four to six blurred, and rows seven to ten concealed until a successful lead save. After unlock, verify all ten rows remain in the same table and order. On mobile, confirm horizontal scrolling works and the ticker/name column stays visible.
 3. Expand each glossary item with mouse, touch, and keyboard; confirm the focus indicator is visible and reduced-motion preference is respected.
 4. Submit an empty form and an invalid email; confirm the browser and server reject them with clear messages.
-5. With a working local PostgreSQL connection and email variables blank, submit a valid lead. Confirm the full comparison unlocks only after the response, the email-not-configured message is truthful, and the lead appears once in PostgreSQL.
+5. With a working local PostgreSQL connection and email variables blank, submit a valid lead. Confirm the full comparison unlocks as soon as the lead-save response arrives, the later email-not-configured message is truthful, and the lead appears once in PostgreSQL.
 6. Submit the same email again with different casing and surrounding spaces. Confirm there is still only one lead record and the comparison unlocks again.
 7. Temporarily stop PostgreSQL and submit a lead. Confirm the page stays locked, provides a retry message, and does not claim a lead was recorded.
 8. Review the full comparison's source links, STXF naming caveat, expense assumptions, data date, privacy placeholders, and educational disclaimer.
+9. Wait six seconds for the lead modal. Close it with the close button and Escape; confirm it does not auto-open again in the same tab. Use the locked-table CTA to reopen the same modal. After unlocking, reload in the same tab and confirm it stays hidden.
+10. Inspect local server output for `funnel_event=... placement=... attribution=...` lines for landing-page view, comparison interaction, visible lead offer, form start, successful lead save, CTA and email status. Confirm names and email addresses are absent, and inspect the lead row to confirm the submitted UTM values were stored.
 
 ## Before public launch
 
