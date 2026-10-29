@@ -18,7 +18,10 @@ def test_landing_page_has_one_early_ten_fund_table_with_locked_continuation():
         response = client.get("/")
 
     assert response.status_code == 200
-    assert "Tři různé přístupy k americkým akciím" in response.text
+    assert "Srovnání 10 amerických ETF: přístup, cíle a roční náklady" in response.text
+    assert response.text.count('role="listitem"') == 10
+    assert 'class="fund-card fund-card-locked-blur"' in response.text
+    assert 'class="fund-card fund-card-locked-hidden"' in response.text
     assert "0,0545 %" in response.text
     assert "0,18 %" in response.text
     assert 'id="full-comparison" aria-labelledby="full-title" hidden' in response.text
@@ -29,7 +32,8 @@ def test_landing_page_has_one_early_ten_fund_table_with_locked_continuation():
     assert table.count('locked-row"') == 7
     assert 'class="locked-preview" data-locked="true" aria-hidden="true"' in table
     assert 'class="locked-hidden" data-locked="true" aria-hidden="true"' in table
-    assert "Odemknout úplné srovnání" in table
+    assert 'class="table-lock-message lock-callout" id="lead-offer"' in response.text
+    assert "Odemknout úplné srovnání" in response.text
     assert response.text.count('id="lead-form"') == 1
     for ticker in ("STXF", "STXG", "STXV", "STXK", "STXD", "DRLL", "SHOC", "BROL", "RONB", "BCSM"):
         assert ticker in table

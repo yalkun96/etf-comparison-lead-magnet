@@ -235,6 +235,7 @@
       document.querySelectorAll("[data-locked]").forEach((group) => {
         group.removeAttribute("data-locked");
         group.removeAttribute("aria-hidden");
+        group.removeAttribute("inert");
       });
       fullComparison.hidden = false;
       fullComparison.setAttribute("aria-hidden", "false");

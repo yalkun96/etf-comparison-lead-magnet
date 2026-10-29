@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f5f4ef">
-    <meta name="description" content="Náhled tří přístupů a rozšířené vzdělávací srovnání deseti ETF primárně kótovaných na NYSE.">
-    <title>Tři přístupy k americkým akciím — srovnání 10 ETF</title>
+    <meta name="description" content="Vzdělávací srovnání deseti ETF kótovaných na NYSE: přístupy, cíle, indexy a roční náklady. Nejprve uvidíte tři fondy.">
+    <title>Srovnání 10 amerických ETF: přístupy, cíle a náklady</title>
     <link rel="stylesheet" href="{{ url_for('static', path='/css/site.css') }}">
     <script src="{{ url_for('static', path='/js/site.js') }}" defer></script>
   </head>
@@ -23,11 +23,11 @@
       <section class="hero page-shell" id="top" aria-labelledby="hero-title">
         <div class="hero-copy">
           <p class="eyebrow"><span class="eyebrow-dot"></span>Průvodce americkými ETF&nbsp; / &nbsp;01</p>
-          <h1 id="hero-title">Tři různé přístupy k americkým akciím. <em>V čem se liší?</em></h1>
-          <p class="hero-description">Široké zaměření na velké firmy, růstový styl a hodnotový styl. Nejprve uvidíte STXF, STXG a STXV; rozšířené srovnání zahrnuje deset ETF primárně kótovaných na NYSE.</p>
+          <h1 id="hero-title">Srovnání 10 amerických ETF: přístup, cíle a roční náklady</h1>
+          <p class="hero-description">Porovnejte tři odlišné investiční přístupy na konkrétních fondech STXF, STXG a STXV. Rozšířené srovnání zahrnuje 10 ETF, jejich cíle, indexy, metodiku, roční náklady a odkazy na zdroje.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#preview" data-funnel-cta="hero">Prohlédnout náhled <span aria-hidden="true">↓</span></a>
-            <span class="hero-note">Nejdřív se podívejte. E-mail až pro úplný přehled deseti fondů.</span>
+            <a class="button button-primary" href="#preview" data-funnel-cta="hero">Prohlédnout první tři fondy <span aria-hidden="true">↓</span></a>
+            <span class="hero-note">Vzdělávací výběr fondů dvou emitentů, nikoli reprezentativní vzorek trhu, žebříček ani investiční doporučení.</span>
           </div>
           <div class="hero-meta" aria-label="Základní informace">
             <span><span class="meta-marker">01</span> tři odlišné styly</span>
@@ -47,8 +47,8 @@
             <p class="section-intro">Každý fond se dívá na americké akcie jinak. Tady jsou první rozdíly — a roční náklady fondu uvedené emitentem.</p>
           </div>
 
-          <p class="comparison-scroll-hint">Na úzké obrazovce posuňte tabulku vodorovně. Ticker a název fondu zůstávají jako orientační sloupec.</p>
-          <div class="comparison-table-wrap" id="comparison-table-wrap" role="region" aria-label="Srovnávací tabulka deseti ETF; na mobilu lze posouvat do stran" tabindex="0">
+          <p class="comparison-scroll-hint">Na mobilu si fondy prohlédněte v přehledných kartách. Rozbalením každé karty zobrazíte cíle, indexy a zdroje.</p>
+          <div class="comparison-table-wrap" id="comparison-table-wrap" role="region" aria-label="Srovnání deseti ETF" tabindex="0">
             <table class="comparison-table" id="comparison-table">
               <caption class="visually-hidden">Srovnání deseti ETF primárně kótovaných na NYSE; nejde o žebříček fondů</caption>
               <thead><tr><th scope="col">Fond</th><th scope="col">Přístup a rozsah</th><th scope="col">Investiční cíl</th><th scope="col">Benchmark / srovnávací index a metodika</th><th scope="col">Roční náklady fondu</th><th scope="col">Primární burza</th></tr></thead>
@@ -64,7 +64,7 @@
                 </tr>
                 {% endfor %}
               </tbody>
-              <tbody class="locked-preview" data-locked="true" aria-hidden="true">
+              <tbody class="locked-preview" data-locked="true" aria-hidden="true" inert>
                 {% for fund in funds[3:6] %}
                 <tr class="comparison-fund-row locked-row">
                   <th scope="row"><span class="table-ticker">{{ fund.ticker }}</span><span class="table-name">{{ fund.name }}</span></th>
@@ -76,10 +76,7 @@
                 </tr>
                 {% endfor %}
               </tbody>
-              <tbody class="lock-callout">
-                <tr><td colspan="6"><div class="table-lock-message" id="lead-offer"><p><strong>Úplné srovnání obsahuje 10 ETF.</strong> Po zadání jména a e-mailu se v této tabulce otevřou všechny fondy včetně jejich cílů, benchmarků, nákladů a zdrojů.</p><button class="button button-primary" id="open-lead-modal" type="button" data-funnel-cta="table_unlock">Odemknout úplné srovnání <span aria-hidden="true">↗</span></button></div></td></tr>
-              </tbody>
-              <tbody class="locked-hidden" data-locked="true" aria-hidden="true">
+              <tbody class="locked-hidden" data-locked="true" aria-hidden="true" inert>
                 {% for fund in funds[6:] %}
                 <tr class="comparison-fund-row locked-row">
                   <th scope="row"><span class="table-ticker">{{ fund.ticker }}</span><span class="table-name">{{ fund.name }}</span></th>
@@ -92,9 +89,36 @@
                 {% endfor %}
               </tbody>
             </table>
+            <div class="mobile-comparison-cards" role="list" aria-label="ETF srovnání v kartách pro úzké obrazovky">
+              {% for fund in funds %}
+              {% set row_index = loop.index0 %}
+              <article class="fund-card{% if row_index >= 3 and row_index < 6 %} fund-card-locked-blur{% elif row_index >= 6 %} fund-card-locked-hidden{% endif %}" role="listitem"{% if row_index >= 3 %} data-locked="true" data-lock-appearance="{% if row_index < 6 %}blurred{% else %}concealed{% endif %}" aria-hidden="true" inert{% endif %}>
+                <div class="fund-card-heading"><div><span class="table-ticker">{{ fund.ticker }}</span><h3 class="table-name">{{ fund.name }}</h3></div><span class="fund-card-cost"><strong>{{ fund.expense_ratio }}</strong><small>ročně</small></span></div>
+                <p class="fund-card-approach">{{ fund.approach }}</p>
+                <p class="fund-card-scope">{{ fund.scope }}</p>
+                <p class="fund-card-illustration">≈ {{ fund.cost_100k }} ročně při investici 100&nbsp;000 Kč</p>
+                <details class="fund-card-details">
+                  <summary>Investiční cíl, index a zdroje <span class="summary-plus" aria-hidden="true"></span></summary>
+                  <div class="fund-card-detail-content">
+                    <p><strong>Investiční cíl:</strong> {{ fund.objective }}</p>
+                    <p><strong>Benchmark / srovnávací index:</strong> {{ fund.benchmark }}</p>
+                    <p><strong>Metodika:</strong> {{ fund.methodology }}</p>
+                    <p><strong>Primární burza:</strong> {{ fund.exchange }} (NYSE; ne NYSE Arca)</p>
+                    <p>{{ fund.note }}</p>
+                    <div class="source-links"><a href="{{ fund.issuer_url }}" target="_blank" rel="noopener noreferrer">Produktová stránka emitenta</a><a href="{{ fund.prospectus_url }}" target="_blank" rel="noopener noreferrer">Prospekt / dokument SEC</a><a href="{{ fund.exchange_url }}" target="_blank" rel="noopener noreferrer">Zdroj burzy</a></div>
+                    <small>{{ fund.source_label }}</small>
+                  </div>
+                </details>
+              </article>
+              {% endfor %}
+            </div>
+            <div class="table-lock-message lock-callout" id="lead-offer">
+              <p><strong>Úplné srovnání obsahuje 10 ETF.</strong> Po zadání jména a e-mailu se v tabulce i kartách otevřou všechny fondy včetně jejich cílů, indexů, metodiky, ročních nákladů a zdrojů.</p>
+              <button class="button button-primary" id="open-lead-modal" type="button" data-funnel-cta="table_unlock">Odemknout úplné srovnání <span aria-hidden="true">↗</span></button>
+            </div>
           </div>
 
-          <p class="preview-disclaimer">Jde o různé investiční přístupy, ne zaměnitelné alternativy ani žebříček od nejlepšího. Uvedené provozní náklady fondu nejsou úplnými náklady investora.</p>
+          <p class="preview-disclaimer">Jde o různé investiční přístupy, ne zaměnitelné alternativy ani žebříček od nejlepšího. Uvedené provozní náklady fondu nejsou úplnými náklady investora. Zařazení na NYSE nepotvrzuje, že je fond dostupný u českého brokera; dostupnost jsme neověřovali.</p>
           <p class="source-line">Zdroje pro první tři fondy byly kontrolovány 28. 10. 2026. Prospekty uvádějí celkové roční provozní náklady a nerozlišují samostatnou hrubou a čistou sazbu. <a href="{{ funds[0].issuer_url }}" target="_blank" rel="noopener noreferrer">STXF</a> · <a href="{{ funds[1].issuer_url }}" target="_blank" rel="noopener noreferrer">STXG</a> · <a href="{{ funds[2].issuer_url }}" target="_blank" rel="noopener noreferrer">STXV</a></p>
       </section>
 
@@ -134,10 +158,10 @@
         <div class="page-shell">
           <div class="unlock-success" id="unlock-success" tabindex="-1">
             <span class="success-icon" aria-hidden="true">✓</span>
-            <div><p class="eyebrow">Přístup zaznamenán</p><h2 id="full-title">Děkujeme, <span id="visitor-name">investore</span>. Přehled je odemčený.</h2></div>
+            <div><p class="eyebrow">Srovnání odemčeno</p><h2 id="full-title">Děkujeme, <span id="visitor-name">investore</span>. Přehled je otevřený.</h2></div>
           </div>
           <div class="email-result" id="email-result" role="status" aria-live="polite"></div>
-          <p class="unlocked-note">Všech deset ETF je nyní zobrazeno v tabulce výše. Níže najdete výpočet nákladů, zdroje, data kontroly a omezení srovnání.</p>
+          <p class="unlocked-note">Všech deset ETF je nyní zobrazeno v tabulce nebo mobilních kartách výše. Níže najdete výpočet nákladů, zdroje, data kontroly a omezení srovnání.</p>
 
           <div class="calculation-note">
             <span class="calculation-mark" aria-hidden="true">≈</span>
@@ -167,14 +191,26 @@
 
       <section class="privacy-section" id="privacy" aria-labelledby="privacy-title">
         <div class="page-shell privacy-inner">
-          <div><p class="eyebrow">Ochrana údajů</p><h2 id="privacy-title">Informace před veřejným spuštěním</h2></div>
-          <div><p>Jméno a e-mail slouží k evidenci žádosti o srovnání a zaslání vyžádaného potvrzení. Volba marketingového souhlasu je samostatná; bez ní marketingové zprávy neposíláme.</p><p><strong>Před veřejným spuštěním doplňte:</strong> totožnost a kontakt správce údajů, schválené právní důvody zpracování, dobu uchování a postup výmazu, úplné znění souhlasu, informace o poskytovatelích služeb a předávání údajů, případně podmínky odvolání souhlasu a odhlášení.</p></div>
+          <div><p class="eyebrow">Ochrana osobních údajů</p><h2 id="privacy-title">Důležité: informace nejsou úplné</h2></div>
+          <div class="privacy-notice">
+            <p><strong>Před veřejným spuštěním a sběrem kontaktů je nutné doplnit a ověřit níže uvedené údaje.</strong> Z dostupného nastavení projektu nelze určit totožnost a kontaktní údaje správce, právní důvody jednotlivých účelů, dobu uchování, provozovatele produkční databáze ani případné předávání údajů do zahraničí. Tato informace proto zatím není úplným oznámením o zpracování osobních údajů.</p>
+            <h3>Jaké údaje a proč</h3>
+            <p>Formulář požaduje jméno a e-mail. Aplikace je ukládá do databáze, aby zaznamenala žádost a po úspěšném uložení zpřístupnila vzdělávací srovnání. U e-mailu aplikace umožňuje opakovaným zadáním znovu otevřít přehled. Jméno a e-mail se také používají k pokusu o odeslání vyžádaného potvrzovacího e-mailu. Odeslání není zaručeno; potvrzení o přijetí požadavku poskytovatelem neznamená doručení do schránky.</p>
+            <h3>Potvrzovací e-mail a poskytovatelé</h3>
+            <p>Kód podporuje odesílání přes Resend, pokud jsou nastaveny potřebné údaje; v takovém případě služba obdrží jméno a e-mail za účelem odeslání vyžádaného potvrzení. Z repozitáře nelze ověřit, zda je služba nakonfigurována v produkci, její smluvní podmínky, místo zpracování, další příjemce ani případné mezinárodní přenosy. Produkční nastavení, smluvní podmínky a roli poskytovatele je nutné před spuštěním ověřit. Produkční databáze se vybírá nastavením <code>DATABASE_URL</code>; jejího poskytovatele a umístění nelze z projektu zjistit. Produkční hosting může zpracovávat technické údaje a provozní protokoly, jeho poskytovatel a podmínky však z projektu nejsou ověřitelné.</p>
+            <h3>Volitelný marketing</h3>
+            <p>Zaškrtávací políčko je dobrovolné, ve výchozím stavu nezaškrtnuté a není podmínkou přístupu. Aplikace ukládá zvolenou možnost a čas jejího zaznamenání. Zasílání marketingových e-mailů není implementováno. Před případným použitím je nutné ověřit právní důvod, přesné znění souhlasu a funkční způsob jeho odvolání a odhlášení. Souhlas lze odvolat; konkrétní kontaktní postup správce zatím není určen.</p>
+            <h3>Další zaznamenané informace, uchování a práva</h3>
+            <p>Spolu se žádostí se ukládají dostupné parametry kampaně (UTM). Události používání stránky se zapisují do aplikačních protokolů bez jména a e-mailu; dobu jejich uchování určuje provozní prostředí a zde není ověřena. Aplikace nemá nastavenou automatickou dobu uchování ani mazání záznamů o zájemcích.</p>
+            <p>Podle okolností a podmínek GDPR můžete uplatnit právo na přístup, opravu, výmaz, omezení zpracování, námitku nebo přenositelnost a podat stížnost u dozorového úřadu. Pokud je zpracování založeno na souhlasu, můžete jej odvolat; odvolání nemá vliv na předchozí zákonnost zpracování. Jak žádost uplatnit, zatím nelze uvést, protože kontaktní údaje správce nejsou doloženy. Více informací: <a href="https://eur-lex.europa.eu/eli/reg/2016/679/ojv" target="_blank" rel="noopener noreferrer">Nařízení GDPR</a> a <a href="https://uoou.gov.cz/verejnost/zakladni-prirucka-k-ochrane-udaju" target="_blank" rel="noopener noreferrer">příručka ÚOOÚ</a>; stížnost lze podat u <a href="https://uoou.gov.cz/online-formular-pro-podani-stiznosti-na-poruseni-predpisu-na-ochranu-osobnich-udaju" target="_blank" rel="noopener noreferrer">Úřadu pro ochranu osobních údajů</a>.</p>
+            <p><strong>Údaje správce a kontaktní údaje, právní základy, doby uchování a výmazu, kontaktní postup pro uplatnění práv a odvolání souhlasu, produkční databázový a hostingový poskytovatel včetně umístění, podmínky a předávání dat u Resend a případné další příjemce je nutné před spuštěním doplnit nebo ověřit a nechat právně posoudit.</strong></p>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <div class="page-shell footer-inner"><a class="wordmark" href="#top"><span class="wordmark-mark" aria-hidden="true">E</span><span>ETF <span class="wordmark-light">PŘEHLED</span></span></a><p>Vzdělávací přehled · Výzkum aktualizován 29. 10. 2026</p><a href="#privacy">Soukromí</a></div>
+      <div class="page-shell footer-inner"><a class="wordmark" href="#top"><span class="wordmark-mark" aria-hidden="true">E</span><span>ETF <span class="wordmark-light">PŘEHLED</span></span></a><p>Vzdělávací přehled · Zdroje kontrolovány 28.–29. 10. 2026</p><a href="#privacy">Soukromí</a></div>
     </footer>
     <dialog class="lead-modal" id="lead-modal" aria-labelledby="lead-modal-title" aria-describedby="lead-modal-description">
       <div class="lead-modal-inner">
@@ -195,9 +231,9 @@
           </div>
           <label class="consent-option" for="marketing-consent">
             <input id="marketing-consent" name="marketing_consent" type="checkbox" value="true">
-            <span>Chci dostávat e-mailové novinky od <strong>[název správce]</strong>. Souhlas je dobrovolný a mohu jej kdykoli odvolat.</span>
+            <span>Chci dostávat budoucí marketingová sdělení e-mailem. Souhlas je dobrovolný, není podmínkou přístupu ke srovnání a lze jej odvolat. Jejich zasílání zatím není spuštěno.</span>
           </label>
-          <p class="privacy-copy">Jméno a e-mail použijeme k zaznamenání vaší žádosti a k zaslání vyžádaného potvrzení. Marketingové zprávy jsou samostatné a nepovinné. <a href="#privacy">Informace o ochraně osobních údajů</a>.</p>
+          <p class="privacy-copy">Jméno a e-mail použijeme k zaznamenání žádosti a pokusu o zaslání vyžádaného potvrzení. Marketing je samostatný a nepovinný. <a href="#privacy">Přečtěte si důležité informace o osobních údajích</a>.</p>
           <button class="button button-primary form-submit" type="submit" data-funnel-cta="form">
             <span class="button-label">Odemknout úplné srovnání</span><span aria-hidden="true">↗</span>
           </button>
